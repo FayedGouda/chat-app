@@ -1,0 +1,38 @@
+{
+  "name": "chatting-app",
+  "version": "1.0.0",
+  "description": "This is a demo chat application for chatting with your friends",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev":"node server.js"
+  },
+  "keywords": [
+    "chat",
+    "demo"
+  ],
+  "author": "Fayed Gouda",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.19.0",
+    "csvtojson": "^2.0.10",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "formidable": "^1.2.1",
+    "jquery": "^3.4.1",
+    "json2csv": "^4.5.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^2.2.33",
+    "mongoose": "^5.5.13",
+    "mongoose-title-case": "^0.1.0",
+    "mongoose-validator": "^2.1.0",
+    "morgan": "^1.9.1",
+    "multer": "^1.4.1",
+    "node-xlsx": "^0.15.0",
+    "nodemailer": "^6.2.1",
+    "passport": "^0.4.0",
+    "passport-facebook": "^3.0.0",
+    "socket.io": "^2.2.0"
+  }
+}
