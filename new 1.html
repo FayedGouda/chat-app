@@ -1,0 +1,48 @@
+
+ <div
+            formArrayName="subject"
+            *ngIf="getSubject().controls.length"
+            >
+            <ng-container
+            *ngFor="
+            let subject of getSubject().controls;
+            let subjectIndex = index
+          "
+            >
+<div [formControlName]="subjectIndex">
+
+             
+              
+           
+        </div>
+
+     <!-- Subject  -->
+              Subject Name*
+<input
+              type="text"
+              placeholder="Subject Name"
+              class=""
+              formControlName="subjectName"
+            />
+            Students Counts*
+ <input
+              type="text"
+              placeholder="Class room number"
+              class="form-control"
+              formControlName="studentsCount"
+            />
+
+
+            <button type="button" class="btn btn-danger" (click)="removeSubject(subjectIndex)">Delete Subject</button>
+
+
+
+
+
+<button
+              (click)="addSubject()"
+              type="button"
+              class="btn btn-success add-btn"
+            >Add Subject</button>
+			</ng-container>
+ </div>

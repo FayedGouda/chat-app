@@ -91,13 +91,13 @@ var upload = multer({storage:storage}).single('audio');
                     var transporter = nodemailer.createTransport({
                         service: 'gmail',
                         auth: {
-                          user: 'nodejsdevoloper@gmail.com',
-                          pass: 'NODEJSDEVELOPER#&@@'
+                          user: '',
+                          pass: ''
                         }
                       });
 
                       var mailOptions = {
-                        from: 'nodejsdeveloper@gmail.com',
+                        from: '',
                         to: user.email,
                         subject: 'localhost activation',
                         html:'Hello <strong>'+user.name+'</strong>, <br><br>Thank you for rgestring'+
@@ -357,65 +357,12 @@ var upload = multer({storage:storage}).single('audio');
         });
     });
     
-    //This route sends username and email of the logged in user
+    //This route sends username and email of the logged in users
     //This route will be accessed only if the user is logged in
     //In other word, the user is having our valid token
     router.post('/me', function(req, res){
         res.send(req.decoded);
     });
 
-    //Importing csv, xls, xlsx files into database(from client)
-    router.post('/importData', (req, res)=>{
-        var product = new Product();
-        var rows=[];
-        var writeStr ="";
-        var obj = xls.parse(__dirname+'/products.xlsx');
-        for(var i = 0; i < obj.length; i++){
-        var sheet = obj[i];
-        //loop through all rows in the sheet
-        for(var j = 0; j < sheet['data'].length; j++){
-                //add the row to the rows array
-                rows.push(sheet['data'][j]);
-            }
-        }
-        for(var i = 0; i < rows.length; i++){
-            writeStr += rows[i].join(",") + "\n";
-        }
-        //if it's xls file
-        csv().fromString(writeStr).then((jsonObject) =>{
-            product.collection.insert(jsonObject, (err, docs)=>{
-                if(err){
-                    res.json({success:false, message:"Error : " +err});
-                }else{
-                    res.json({success:true, message:"Documents inserted successfully"});
-                }
-            });
-
-        });
-        
-    });
-
-    //Exporting data as csv, xls, xlsx files(from server to client)
-    router.get('/exportData', (req, res)=>{
-        var product = new Product();
-        const fields = ['ProductID','ProductName','SupplierID',
-                        'CategoryID','QuantityPerUnit','UnitPrice',
-                        'UnitsInStock','UnitsOnOrder','ReorderLevel',
-                        'Discontinued'];
-        const json2csvParser = new Parser({fields});
-
-        Product.find({}, (err, products)=>{
-            if(err){
-                res.json({success:false, message:err});
-            }else{
-                const csv = json2csvParser.parse(products);
-                // console.log(csv);
-                fs.writeFileSync(__dirname+'/results.csv', csv, (err)=>{
-                    if(err) throw err;
-                    // console.log("Written");
-                });
-                res.download(__dirname+'/results.csv');
-            }
-        });
-    });
+  
   module.exports = router;
